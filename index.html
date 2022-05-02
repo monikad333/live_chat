@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>Send message to your friend 🥰</h1>
+		<div id="messageContainer">
+		</div>
+		<div>
+			<input type="text" id="messageBox" placeholder="Type your message here" />
+			<div style="display: flex;">
+				<button id="send" title="Send Message!" >Send Message</button>
+				<button id="change" title="Change Nick!" >Change Nick</button>
+			</div>
+
+		</div>
+		<script>
+			(function () {
+				const messageContainer = document.getElementById('messageContainer');
+				const sendBtn = document.querySelector('#send');
+				const messageBox = document.querySelector('#messageBox');
+				const setName = document.querySelector('#setName');
+				let nicnkame = document.querySelector('#change');
+				let name = "Default name";
+				let ws;
+
+				function showMessage(message, flag) {
+					if (flag) {
+						messageContainer.innerHTML += `<div class="bubble mine">${message}</div><br><br>`;
+					} else {
+						messageContainer.innerHTML += `<div class="bubble">${message}</div><br><br>`;
+					}
+					messageBox.value = '';
+				}
+
+				function init() {
+					name = prompt('Insert your nickname') ?? "Default";
+					if (ws) {
+						ws.onerror = ws.onopen = ws.onclose = null;
+						ws.close();
+					}
+
+					ws = new WebSocket('ws://localhost:6969');
+					ws.onopen = () => {
+						console.log('Connection opened!');
+					};
+					ws.onmessage = ({ data }) => showMessage(data, false);
+					ws.onclose = function () {
+						ws = null;
+					};
+				}
+
+				sendBtn.onclick = function () {
+					if (!ws) {
+						showMessage('No WebSocket connection :(');
+						return;
+					}
+					ws.send(name+": "+messageBox.value);
+					showMessage(messageBox.value, true);
+				};
+
+				nicnkame.onclick = function() {
+					name = prompt('Insert your nickname') ?? "Default";
+				}
+
+				init();
+			})();
+		</script>
+	</body>
+</html>
