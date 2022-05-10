@@ -3,10 +3,10 @@ const path = require('path');
 const  { WebSocketServer } = require('ws')
 
 const wss = new WebSocketServer({
-    port: 6970
+    port: 8081
   });
 const app = express();
-const port = process.env.PORT || 6969;
+const port = process.env.PORT || 8080;
 app.use(express.static(__dirname + '/public'));
 wss.on("connection", ws => {
   ws.on("message", data => {
@@ -27,4 +27,4 @@ app.get('/', function(req, res) {
 });
 
 app.listen(port);
-console.log('Server started at http://localhost:' + port);
+console.log('Server started at port:' + port);
