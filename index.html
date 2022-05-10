@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="./style.css" />
 		<title>Document</title>
 	</head>
 	<body>
@@ -45,24 +45,32 @@
 						ws.close();
 					}
 
-					ws = new WebSocket('ws://localhost:6969');
+					ws = new WebSocket('ws://localhost:6970');
 					ws.onopen = () => {
 						console.log('Connection opened!');
 					};
-					ws.onmessage = ({ data }) => showMessage(data, false);
+					ws.onmessage = ({ data }) => {
+						console.log(data)
+						showMessage(data, false)};
 					ws.onclose = function () {
 						ws = null;
 					};
 				}
-
-				sendBtn.onclick = function () {
+				function sendData(){
 					if (!ws) {
 						showMessage('No WebSocket connection :(');
 						return;
 					}
 					ws.send(name+": "+messageBox.value);
 					showMessage(messageBox.value, true);
-				};
+				}
+				sendBtn.addEventListener("click", sendData)
+				messageBox.addEventListener('keypress', function (e) {
+					if (e.key === 'Enter') {
+						sendData()
+					}
+				})
+
 
 				nicnkame.onclick = function() {
 					name = prompt('Insert your nickname') ?? "Default";

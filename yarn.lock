@@ -351,7 +351,7 @@
   "resolved" "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   "version" "1.1.2"
 
-"ws@^7.2.3":
-  "integrity" "sha512-HTDl9G9hbkNDk98naoR/cHDws7+EyYMOdL1BmjsZXRUjf7d+MficC4B7HLUPlSiho0vg+CWKrGIt/VJBd1xunQ=="
-  "resolved" "https://registry.npmjs.org/ws/-/ws-7.2.3.tgz"
-  "version" "7.2.3"
+"ws@^8.6.0":
+  "integrity" "sha512-AzmM3aH3gk0aX7/rZLYvjdvZooofDu3fFOzGqcSnQ1tOcTWwhM/o+q++E8mAyVVIyUdajrkzWUGftaVSDLn1bw=="
+  "resolved" "https://registry.npmjs.org/ws/-/ws-8.6.0.tgz"
+  "version" "8.6.0"
