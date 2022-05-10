@@ -3,7 +3,7 @@ const path = require('path');
 const  { WebSocketServer } = require('ws')
 
 const wss = new WebSocketServer({
-    port: 8081
+    port: 20103
   });
 const app = express();
 const port = process.env.PORT || 8080;
@@ -17,7 +17,6 @@ wss.on("connection", ws => {
       }
     })
 
-    console.log(`Client has sent us: ${data}`)
   });
 
 });
